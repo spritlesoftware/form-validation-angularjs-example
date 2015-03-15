@@ -1,0 +1,72 @@
+<section>
+	<form name="userRegForm" ng-submit="submitSignupForm(userRegForm.$valid)" novalidate>
+		<ul style="list-style-type: none;">
+			
+			<li>
+				<input class="" type="email" name="email" placeholder="Enter Email Address" ng-model="user.email" value="" required>
+			</li>
+			
+			<li class="password_title"><div class="grey_title signup_title">Password must contain at least 8 characters, 1 Capital Letter and 1 Number.</div></li>
+			
+			<li>
+				<input class="" type="password" ng-model="user.password" name="password" placeholder="Enter Password" value="" ng-minlength="8" ng-maxlength="20" ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/" required>
+			</li>
+			
+			<li class="form_sub">
+				<input class="" type="password" placeholder="Re-Enter Password" name="confirm_password" ng-model="user.confirm_password" value="" ng-minlength="8" ng-maxlength="20" required>
+			</li>
+			
+			<li>
+				<input  type="number" placeholder="Mobile Number" name="mobile"  ng-model="user.mobile"  onkeyup="change(this);" ng-minlength="10">
+			</li>
+			<script type="text/javascript">
+			function change (el) {
+				var max_len = 11;
+				if (el.value.length > max_len) {
+					el.value = el.value.substr(0, max_len);
+				}
+			}
+			</script>
+			
+			
+			<li class="password_title agree_cont">
+				<div class="grey_title signup_title">
+					<label class="agree_label" for="agree_check" ng-class="{checked: user.isTermsChecked}"></label>
+					<input id="agree_check" type="checkbox" ng-model="user.isTermsChecked" name="termsAndConditions" required>
+					I agree terms and conditions
+				</div>
+			</li>
+			
+			<li>
+				<input class="signup_submit" type="submit" value="Sign Up">
+			</li>
+		</ul>
+	</form>
+	
+	<script type="text/ng-template" id="authErrorTemplate" >
+	  <div class="ng-dialog-div">
+		<p class="text-center" ng-show="userRegForm.email.$error.required">Email address is required.</p>
+		<p class="text-center" ng-show="userRegForm.email.$error.email">Not a valid email.</p>
+		<p class="text-center" ng-show="userRegForm.password.$error.required && (!IsNotMatch)">Password is required.</p>
+		<p class="text-center" ng-show="userRegForm.password.$error.minlength">Password is too short.</p>
+		<p class="text-center" ng-show="userRegForm.password.$error.maxlength">Password is too long.</p>
+		<p class="text-center" ng-show="userRegForm.password.$error.pattern">Password must contain at least 8 characters, 1 Capital Letter and 1 Number.</p>
+		<p class="text-center" ng-show="IsNotMatch">Passwords do not match.</p>
+		<p class="text-center" ng-show="userRegForm.mobile.$error.number">Not a valid mobile number.</p>
+		<p class="text-center" ng-show="userRegForm.mobile.$error.minlength">Mobile number is too short.</p>
+		<p class="text-center" ng-show="userRegForm.mobile.$error.maxlength">Mobile number is too long.</p>
+		<p class="text-center" ng-show="userRegForm.termsAndConditions.$error.required">Please agree to the hippocratus terms of us.</p>
+	  </div>
+	  <div class="ngdialog-buttons ng-dialog-border-top"><button type="button" class="alert_ok_button" ng-click="closeThisDialog(0)">OK</button></div>
+	</script>
+	
+    <script type="text/ng-template" id="signUpRedirect">
+	  <div class="ngdialog-message">
+	    <p style="text-align:center;">{{ngDialogData.foo}}</p>
+	  </div>
+	  <div class="ngdialog-buttons">
+	    <button type="button" class="signup_submit" ng-dialog-controller="SignupCtrl" ng-click="navigateToLogin()">OK</button>
+	  </div>
+    </script>
+	
+</section>
