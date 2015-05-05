@@ -1,0 +1,1 @@
+var hippocratusApp = angular.module('starter.controllers', [])
